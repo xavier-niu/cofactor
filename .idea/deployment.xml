@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" autoUpload="On explicit save action" serverName="root@nas.i.nxw.name:22" remoteFilesAllowedToDisappearOnAutoupload="false">
+    <serverData>
+      <paths name="root@nas.i.nxw.name:22">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/tmp/pycharm_project_902" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+    <option name="myAutoUpload" value="ON_EXPLICIT_SAVE" />
+  </component>
+</project>

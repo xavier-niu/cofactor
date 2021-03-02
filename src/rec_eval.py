@@ -153,8 +153,16 @@ def precision_at_k_batch(train_data, heldout_data, Et, Eb, user_idx,
 
     X_pred = _make_prediction(train_data, Et, Eb, user_idx,
                               batch_users, mu=mu, vad_data=vad_data)
+    # Xavier: first k indexes are corresponding to highest k elements.
     idx = bn.argpartition(-X_pred, k, axis=1)
+    # Xavier: a matrix whose elements are zero, in this case, are false.
     X_pred_binary = np.zeros_like(X_pred, dtype=bool)
+    # Xavier: np.arange(batch_users) returns an array like [batch_users.start, ..., batch_users.end]
+    #   [:, np.newaxis] -> reshape the array from (batch_users.amount,) to (batch_users.amount, 1)
+    #       ref: https://stackoverflow.com/questions/29241056/how-does-numpy-newaxis-work-and-when-to-use-it
+    #   Set the value to 1 at (userIdx, itemIdx), where userIdxes denotes all users in batch_users and itemIdxes denotes
+    #       all indexes representing the items that are highest k prediction and (userIdx, itemIdx) is all possible
+    #       values in cartesian product of userIdxes and itemIdxes
     X_pred_binary[np.arange(batch_users)[:, np.newaxis], idx[:, :k]] = True
 
     X_true_binary = (heldout_data[user_idx] > 0).toarray()
